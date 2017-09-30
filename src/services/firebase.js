@@ -40,10 +40,15 @@ function addComment (key, comment = '') {
   })
 }
 
+function deleteMarker (key) {
+  return firebase.database().ref(`/markers/${key}`).remove()
+}
+
 export default {
   initFirebase,
   getMarkers,
   pushNewMarker,
   addReaction,
-  addComment
+  addComment,
+  deleteMarker
 }

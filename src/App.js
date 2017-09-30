@@ -108,6 +108,7 @@ const MapWithInfoWindow = compose(
                     👎 <button onClick={() => props.reaction(key, 'hate')}>{props.markers[key].reactions && props.markers[key].reactions.hate || 0}</button>&nbsp;
                   </span>
                   <button onClick={() => props.commenting(key)}>comments ({props.markers[key].comments && Object.keys(props.markers[key].comments).length || 0})</button>
+                  <button onClick={() => props.onDeleteMarker(key)}>x</button>
                 </div>
               </div>
               { props.markers[key].isCommenting &&
@@ -252,6 +253,10 @@ class App extends Component {
             })
           }}
           onSubmitComment={(key, comment) => this._submitComment(key, comment)}
+          onDeleteMarker={(key) => {
+            let c = window.prompt('enter password to delete')
+            if (c === 'tenten') Firebase.deleteMarker(key)
+          }}
         />
       </div>
     );
