@@ -29,8 +29,21 @@ function pushNewMarker ({ lat, lng, message = 'hello world', owner = '🎈', ico
   })
 }
 
+function addReaction (key, action, val) {
+  return firebase.database().ref(`/markers/${key}/reactions/${action}`).set(val)
+}
+
+function addComment (key, comment = '') {
+  return firebase.database().ref(`/markers/${key}/comments`).push({
+    createdAt: new Date().getTime(),
+    content: comment
+  })
+}
+
 export default {
   initFirebase,
   getMarkers,
-  pushNewMarker
+  pushNewMarker,
+  addReaction,
+  addComment
 }
